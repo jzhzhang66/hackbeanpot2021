@@ -1,5 +1,4 @@
 import React from 'react';
-import Btn from '../components/btn';
 import Header from '../components/header';
 import SearchBar from '../components/searchbar';
 import Title from '../components/title';
@@ -17,7 +16,6 @@ function Home() {
                 <div className="rectangle"></div>
             </div>
             <SearchBar text={searchText}/>
-            <Btn text="search"/>
         </div>
     );
 }
