@@ -1,3 +1,5 @@
-// const {getPics} = require('./spotify')
+const {getPics} = require('./spotify')
+const {getBooksByTitle} = require('./googlebooks')
 
-// getPics()
+//getPics()
+
