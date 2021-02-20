@@ -3,5 +3,13 @@
     font-weight: bold;
     width: 700px;
     margin: 0 auto;
-    padding-top: 4rem;
+    padding-top: 4.5rem;
+    padding-bottom: 50px;
+}
+
+.rectangle {
+    background-color: #89C076;
+    height: 30px;
+    margin: -43px auto auto 0;
+    width: 550px;
 }
