@@ -1,9 +1,12 @@
 import React from 'react';
+import SearchBar from '../components/searchbar';
 import './home.css';
 
 function Home() {
     return (
-        <div>home</div>
+        <div> home
+            <SearchBar />
+        </div>
     );
 }
 
