@@ -21,13 +21,14 @@ async function analyzetone(text) {
       
       await toneAnalyzer.tone(toneParams)
         .then(toneAnalysis => {
-          toneResults = JSON.stringify(toneAnalysis, null, 2)
+          toneResults = toneAnalysis
         })
         .catch(err => {
           console.log('error:', err);
         });
 
-    console.log(toneResults)
+    const sentenceTones = toneResults.result.sentences_tone
+    
 }
 
 module.exports = {
