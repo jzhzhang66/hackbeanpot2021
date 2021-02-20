@@ -7,7 +7,7 @@ function Header() {
         <div className="header-container">
             <img src={booktoonslogo} className="logo"/>
             <div className="name-container">
-                <h1>book toons</h1>
+                <h3>book toons</h3>
             </div>
         </div>
     );

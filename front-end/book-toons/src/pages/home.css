@@ -3,13 +3,17 @@
     font-weight: bold;
     width: 700px;
     margin: 0 auto;
-    padding-top: 4.5rem;
-    padding-bottom: 50px;
+    padding-top: 2rem;
+    padding-bottom: 15px;
 }
 
 .rectangle {
     background-color: #89C076;
     height: 30px;
-    margin: -43px auto auto 0;
+    margin: -43px auto 60px 0;
     width: 550px;
+}
+
+.homebutton-container {
+    margin: 3rem 0 0 69rem;
 }

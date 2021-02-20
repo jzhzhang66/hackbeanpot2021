@@ -12,6 +12,10 @@
     line-height: 30px;
 }
 
+h3 {
+    font-size: 35px;
+}
+
 .logo {
     width: 100px;
     height: 100%;
