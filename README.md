@@ -1,4 +1,4 @@
-#HackBeanpot 2021 Project
+# HackBeanpot 2021 Project
 
 **Members**
 * Adrianna Liu
