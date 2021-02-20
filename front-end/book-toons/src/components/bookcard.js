@@ -1,11 +1,11 @@
 import React from 'react';
 import './bookcard.css';
 
-function BookCard() {
+function BookCard(props) {
     return (
         <div className="bookcard-container">
-            <p>Book Title 1</p>
-            <p>Author</p>
+            <p>{props.title}</p>
+            <p>{props.author}</p>
         </div>
     );
 }
