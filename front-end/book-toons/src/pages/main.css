@@ -7,3 +7,20 @@ p {
     font-family: "Arial Unicode MS", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 25px;
 }
+
+button {
+    font-family: "Helvetica Neue", Helvetica, sans-serif; 
+    font-weight: 700;
+    font-size: 25px;
+    border-radius: 8px;
+    padding: .5rem 1rem;
+    background-color: #FFFAF2;
+    cursor: pointer;
+    border: solid 3px black;
+}
+
+button:hover {
+    border: solid 3px #89C076;
+    color: #89C076;
+    transition: 200ms;
+}

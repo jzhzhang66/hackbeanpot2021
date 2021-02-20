@@ -1,13 +1,12 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'
 import './btn.css';
 
 function Btn(props) {
     return (
         <div>
-            <Button>{props.text}</Button>
+            <input type="button">{props.text}/</input>
         </div>
     );
 }
 
-export default Btn
+export default Btn;

@@ -9,10 +9,9 @@
     font-size: 50px;
     margin: 0 auto;
     position: relative;
-    top: 0;
 }
 
-.rectangle {
+.underline {
     background-color: #89C076;
     height: 30px;
     margin: -20px auto 3rem auto;

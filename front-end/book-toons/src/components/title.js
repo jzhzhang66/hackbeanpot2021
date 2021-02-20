@@ -5,7 +5,7 @@ function Title(props) {
     return (
         <div className="title-wrapper">
             <h1 className="title">{props.text}</h1>
-            <div className="rectangle" style={{width: props.width}}></div>
+            <div className="underline" style={{width: props.width}}></div>
         </div>
     );
 }
