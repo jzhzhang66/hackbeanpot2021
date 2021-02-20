@@ -1,4 +1,4 @@
-# HackBeanpot 2021 Project
+# Book Toons
 
 **Members**
 * Adrianna Liu
