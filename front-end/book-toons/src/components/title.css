@@ -15,5 +15,5 @@
 .rectangle {
     background-color: #89C076;
     height: 30px;
-    margin: -20px auto auto auto;
+    margin: -20px auto 3rem auto;
 }
