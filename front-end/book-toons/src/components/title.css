@@ -1,0 +1,19 @@
+.title-wrapper {
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    z-index: 1;
+    font-size: 50px;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+}
+
+.rectangle {
+    background-color: #89C076;
+    height: 30px;
+    margin: -20px auto auto auto;
+}
