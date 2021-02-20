@@ -4,9 +4,20 @@ const url = 'https://www.googleapis.com/books/v1/volumes?'
 
 
 async function getBooksByTitle(title) {
-    const response = await axios.get(`${url}q=${title}&key=${key}`)
-        .then(response => console.log(response.data))
-    return response
+    const bookResults = await axios.get(`${url}q=${title}&key=${key}`)
+        .then(response => response.data.items)
+    const listOfBooks = []
+    for (var i = 0; i < bookResults.length; i++) {
+        const curr = bookResults[i]
+        const book = {
+            id: curr.id,
+            title: curr.volumeInfo.title,
+            authors: curr.volumeInfo.authors[0],
+            description: curr.volumeInfo.description
+        }
+        listOfBooks.push(book)
+    }
+    console.log(listOfBooks)
 }
 
 module.exports = {
