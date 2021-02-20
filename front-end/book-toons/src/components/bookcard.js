@@ -1,13 +1,18 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import './bookcard.css';
 
-function BookCard(props) {
-    return (
-        <div className="bookcard-container">
-            <p>{props.title}</p>
-            <p>{props.author}</p>
-        </div>
-    );
+class BookCard extends React.Component {
+    
+    render() {
+        return (
+            <button className={this.props.selected ? "card-button selected" : "card-button"} 
+            onClick={() => this.props.updateSelected(this.props.book.id)}>
+                    <p>{this.props.book.title}</p>
+                    <p>{this.props.book.author}</p>
+            </button>
+        );
+    }
 }
 
 export default BookCard;
