@@ -13,7 +13,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-require("./example")(app)
+require("./people")(app)
 app.listen(port, function () {
     console.log('Our app is running on http://localhost:' + port);
   });
