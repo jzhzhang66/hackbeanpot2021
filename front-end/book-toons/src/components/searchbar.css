@@ -1,0 +1,19 @@
+.search-input {
+    width: 800px;
+    height: 40px;
+}
+
+.search-div {
+    margin: 0 auto;
+}
+
+html {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+input, label {
+    margin-left: 250px;
+    display: flex;
+    align-items: center;
+}
