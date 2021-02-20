@@ -1,3 +1,3 @@
-const {getPics} = require('./spotify')
+// const {getPics} = require('./spotify')
 
-getPics()
+// getPics()
