@@ -8,32 +8,19 @@ import { motion } from "framer-motion";
 class Playlist extends React.Component {
     constructor(props) {
         super(props)
+        if (!this.props.history.location.state) {
+            this.props.history.push('/hackbeanpot2021')
+        }
         this.state = {
-            dummy: [
-                {
-                    song: 'julie',
-                    artist: 'taylor swift'
-                },
-                {
-                    song: 'megan',
-                    artist: 'beyonce'
-                },
-                {
-                    song: 'judy',
-                    artist: 'demi lovato'
-                },
-                {
-                    song: 'shine',
-                    artist: 'nerd'
-                }
-            ], 
             id_selected: "",
             userInput: "",
-            isLoading: true
+            isLoading: true,
+            playlist: this.props.history.location.state.playlist
         }     
     }
 
     render() {
+        {console.log(this.state.playlist)}
         return (
             <div>
             {this.state.isLoading &&
@@ -41,10 +28,11 @@ class Playlist extends React.Component {
             <Header/>
             <Title text="your playlist" width={'320px'}/>
             <div className="playlist-container">
-                    {this.state.dummy.map(song => 
+                    {this.state.playlist.map(song => <a href={song.songUrl}>
                     <p className="song" song={song} 
                     updateSelected={this.updateSelected} 
-                    selected={this.state.id_selected === song.id}>{song.song + ' -'} {song.artist}</p>)}
+                    selected={this.state.id_selected === song.id}>{song.title + ' -'} {song.artist + ' - '} </p>
+                    </a>)}
                 </div>
             <div className="playlist-buttoncontainer">
                 <Link to="/hackbeanpot2021">
