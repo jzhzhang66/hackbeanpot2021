@@ -3,6 +3,7 @@ import Header from '../components/header';
 import SearchBar from '../components/searchbar';
 import './home.css';
 import './main.css';
+import { motion } from "framer-motion";
 
 class Home extends React.Component {
 
@@ -27,9 +28,12 @@ class Home extends React.Component {
                     <h1>find the perfect soundtrack for your personal reading session.</h1>
                     <div className="rectangle"></div>
                 </div>
-                <SearchBar updateInput={this.updateInput} text="start by searching for the title of your book..."/>
+                <SearchBar searchInput={this.state.userInput} 
+                updateInput={this.updateInput} text="start by searching for the title of your book..."/>
                 <div className="homebutton-container">
-                    <button>search</button>
+                    <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.8 }} >search</motion.button>
                 </div>
             </div>
         );

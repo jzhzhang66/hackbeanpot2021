@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Title from '../components/title';
 import BookCard from '../components/bookcard';
 import SearchBar from '../components/searchbar';
+import { motion } from "framer-motion";
 
 class BookResults extends React.Component {
     constructor(props) {
@@ -63,11 +64,15 @@ class BookResults extends React.Component {
                     selected={this.state.id_selected === b.id}/>)}
                 </div>
                 <div className="bookresult-buttoncontainer">
-                    <button>continue</button>
+                <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.8 }} >continue</motion.button>
                 </div>
                 <SearchBar text={searchText} updateInput={this.updateInput}/>
                 <div className="search-buttoncontainer">
-                    <button>search</button>
+                <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.8 }} >search</motion.button>
                 </div>
             </div>
         )

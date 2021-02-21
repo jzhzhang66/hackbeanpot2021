@@ -1,6 +1,6 @@
 import React from 'react';
 import './app.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from '../pages/home';
 import BookResults from '../pages/bookresults';
 import Artists from '../pages/artists';
