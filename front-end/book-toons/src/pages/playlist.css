@@ -1,5 +1,5 @@
 .playlist-buttoncontainer {
-    margin: 3rem 0 0 69rem;
+    margin: 4rem 0 4rem 69rem;
 }
 
 .loading-text {
@@ -11,4 +11,17 @@
 
 .song {
     text-align: center;
+    margin-left: 8rem;
+    margin-right: 8rem;
+}
+
+.song-link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Arial Unicode MS', "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.song-link:hover{
+    color: #89C076;
+    transition: 300ms;
 }
