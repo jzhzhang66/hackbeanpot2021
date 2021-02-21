@@ -8,6 +8,8 @@ const combined = client_id + ":" + client_secret;
 const authorized = 'Basic ' + Buffer.from(combined).toString('base64');
 const country = 'US';
 
+// authorizes the user and grabs the access token
+// output: JSON get request containing token
 function getAuthorization() {
     var axios = require('axios');
     return axios({
@@ -15,6 +17,7 @@ function getAuthorization() {
         method: 'post',
         params: {
             grant_type: grant_type
+            //scopes: 'modify-playlist-public'
         },
         headers: {
             Authorization: authorized
@@ -25,16 +28,15 @@ function getAuthorization() {
         });
 }
 
-async function getRelatedArtists(userArtistUri, accessToken) {
+// given a user's 3 inputted artists' uri's, grabs the related artists' uri's
+// args: String userArtistUri, JSON accessToken
+// output: list of ids including inputted artists' and related artists'
+async function getRelatedArtists(userArtistId, accessToken) {
     var artistsId = [];
-    artistsId = userArtistUri.map(uri => {
-        const artId = uriToId(uri);
-        return artId;
-    })
-    var relatedArtistsId = userArtistUri.map(uri => {
-        const artId = uriToId(uri);
+    artistsId.concat(userArtistId)
+    var relatedArtistsId = userArtistId.map(id => {
         return axios({
-            url: `https://api.spotify.com/v1/artists/${artId}/related-artists`,
+            url: `https://api.spotify.com/v1/artists/${id}/related-artists`,
             method: 'get',
             headers: {
                 Authorization: "Bearer " + accessToken.access_token
@@ -52,12 +54,18 @@ async function getRelatedArtists(userArtistUri, accessToken) {
     return artistsId;
 }
 
+// converts a uri to an id
+// args: String uri
+// output: artist id
 function uriToId(uri) {
     var uriSplit = uri.toString().split(":");
     const artId = uriSplit[uriSplit.length - 1];
     return artId;
 }
 
+// given a list of artist ids, grabs the top tracks of all of the artists and returns them
+// args: Array artistsId, JSON accessToken
+// output: Array of topTracks of all artists
 async function getTopTracks(artistsId, accessToken) {
     var topTracks = [];
     var artistTopTracks = artistsId.map(id => {
@@ -81,51 +89,66 @@ async function getTopTracks(artistsId, accessToken) {
     })
     return topTracks;
 }
-async function main() {
+
+// main method that calls all other methods
+// args: JSON mood, Array userArtists
+// output: list of mood-relevant songs
+async function main(mood, userArtists) {
     var token = await getAuthorization();
     //TODO: convert user input to spotify uri !
-    var artistList = await getRelatedArtists(['spotify:artist:06HL4z0CvFAxyc27GXpf02', 'spotify:artist:163tK9Wjr9P9DmM0AVK7lm', 'spotify:artist:6eUKZXaKkcviH0Ku9w2n3V'], token);
+    // // var artistList = await getRelatedArtists([, token);
+    // var userArtistIds = userArtists.map(async (artist) => {
+    //     return await getArtistId(artist, token)
+    // })
+
+    var userArtistIds = [await getArtistId(userArtists[0], token), await getArtistId(userArtists[1], token), await getArtistId(userArtists[2], token)]
+
+    var artistList = await getRelatedArtists(userArtistIds, token);
     //TODO: call artist top tracks
     //      call song selection function
     //      either return list of songs or create playlist
     var trackList = await getTopTracks(artistList, token);
 
-    //console.log(await getTitleAndArtist(['6NFyWDv5CjfwuzoCkw47Xf', '1ZY1PqizIl78geGM4xWlEA'], token));
-
-    //json object for testing!!
-    const jsonDerulo = {
-        joy: 0.2,
-        sadness: 0.5,
-        anger: 0.1,
-        confident: 0.2
-    }
-
-    var finalSongs = await getSongs(trackList, jsonDerulo, token);
+    var finalSongs = await getSongs(trackList, mood, token);
     //console.log(finalSongs);
 
     //sanity checking the playlist results
     var sanityCheck = await getTitleAndArtist(finalSongs, token)
-    console.log(sanityCheck)
 
-    // var searchResults = await getArtistName('Taylor Swifit', token)
+    // var searchResults = await getArtistId('Taylor Swifit', token)
     // console.log(searchResults)
     // return searchResults;
 
-    const exName = 'pov: you\'re listening to the toons of chain of gold'
-    const exDescription = 'perfect for all your listening needs—created by book toons.'
-    var createdPlaylist = await createPlaylist(exName, exDescription, token)
-    console.log(createdPlaylist)
+    // const exName = 'pov: you\'re listening to the toons of chain of gold'
+    // const exDescription = 'perfect for all your listening needs—created by book toons.'
+    // var createdPlaylist = await createPlaylist(exName, exDescription, token)
+    // console.log(createdPlaylist)
+    // return createdPlaylist
+
+    return sanityCheck;
 }
 
-main();
+const exArtistList = ['Taylor Swift', 'Lorde', 'Ed Sheeran']
 
+//json object for testing!!
+const jsonDerulo = {
+    joy: 0.2,
+    sadness: 0.5,
+    anger: 0.1,
+    confident: 0.2
+}
+
+main(jsonDerulo, exArtistList).then(response => console.log(response));
+
+
+// gets all of the relevant songs that are to be in the mood playlist
+// args: Array tracklist (database of all songs to choose from), JSON jsonObj (mood obj), JSON accessToken
+// output: Array of the songs in the final playlist
 async function getSongs(trackList, jsonObj, accessToken) {
     trackList = trackList.sort(() => Math.random() - 0.5);
-    console.log(trackList.length);
     var finalSongs = [];
     var counter = 100;
     //note: trackList.length + 100????
-    var iterations = 0;
     while (finalSongs.length < 30 && counter < trackList.length - (trackList.length % 100)) {
         var hundred = trackList.slice(counter - 100, counter);
         var hundredCopy = Array.from(hundred);
@@ -147,13 +170,14 @@ async function getSongs(trackList, jsonObj, accessToken) {
             }
         })
         counter = counter + 100;
-        iterations++
     }
     //finalSongs.slice(0, 30)
-    console.log(iterations)
     return finalSongs;
 }
 
+// checks to see whether a given song matches the mood of the book
+// args: JSON jsonObj (mood object), JSON feature (given song's feature list)
+// output: boolean saying whether it passed the vibecheck
 function passesMood(jsonObj, feature) {
     var bookMoods = calcMoods(jsonObj);
     var bookMode;
@@ -173,6 +197,9 @@ function passesMood(jsonObj, feature) {
         ((danceability && energy) || (energy && tempo) || (danceability && tempo)));
 }
 
+// scaling the mood values so they all add up to one and creates the ideal vibes for the book and converts to track features
+// args: JSON jsonObj (mood object)
+// output: JSON ideal track features based on mood
 function calcMoods(jsonObj) {
     var moodTotals = parseFloat(jsonObj.joy + jsonObj.confident + jsonObj.anger + jsonObj.sadness)
     var joy = jsonObj.joy / moodTotals
@@ -189,10 +216,17 @@ function calcMoods(jsonObj) {
     return moods;
 }
 
+// checks to see whether a given value is between a range
+// args: float rangeVal (weight of a track feature for mood (ex. how much does danceability matter for anger)), 
+// float comparator (track's feature value (ex. danceability = 0.2)), float absVal (wideness of range)
+// output: boolean
 function inBetween(rangeVal, comparator, absVal) {
     return comparator <= rangeVal + absVal && comparator >= rangeVal - absVal;
 }
 
+// grabs the title and artist given list of trackIds
+// args: Array listIds (all of the trackIds), JSON accessToken
+// output: JSON songInfo (title and artist info)
 async function getTitleAndArtist(listIds, accessToken) {
     var songInfo = [];
     var songResponses = listIds.map(() => {
@@ -223,7 +257,10 @@ async function getTitleAndArtist(listIds, accessToken) {
     return songInfo;
 }
 
-async function getArtistName(userInputArtist, accessToken) {
+// gets top artist id using search API given user's inputted artist name
+// args: String userInputArtist (name of artist), JSON accessToken
+// output: id of top closest artist 
+async function getArtistId(userInputArtist, accessToken) {
 
     var artistList = [];
     var artistResults = await axios({
@@ -238,11 +275,16 @@ async function getArtistName(userInputArtist, accessToken) {
             }
         }).catch(error => console.log(error))
     artistResults.data.artists.items.forEach(item => {
-        artistList.push(item.name);
+        // if something goes wrong, it used to be item.name
+        artistList.push(item.id);
     })
-    return artistList;
+    //currently only returning the top search result, can be modified if we add a search dropdown
+    return artistList[0];
 }
 
+// creates a playlist in user's acc (currently not working oops)
+// args: String name (playlist name), String description (playlist description), JSON accessToken
+// output: JSON playlist object
 async function createPlaylist(name, description, accessToken) {
     var userId = '12161275801'
     var axios = require('axios');
@@ -259,5 +301,8 @@ async function createPlaylist(name, description, accessToken) {
     })
         .then((response) => {
             return response.data;
-        });
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 }
