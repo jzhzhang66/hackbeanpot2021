@@ -76,6 +76,14 @@ async function analyzetone(text) {
     tones.analytical = tones.analytical / len
     tones.confident = tones.confident / len
     tones.tentative = tones.tentative / len
+
+    if ((tones.joy + tones.anger + tones.sadness + tones.confident) === 0) {
+        tones.joy = Math.random()
+        tones.anger = Math.random()
+        tones.sadness = Math.random()
+        tones.confident = Math.random()
+    }
+
     console.log(tones)
     return tones 
 }
