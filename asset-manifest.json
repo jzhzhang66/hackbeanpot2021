@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/hackbeanpot2021/static/css/main.929ae3ab.chunk.css",
-    "main.js": "/hackbeanpot2021/static/js/main.1c1b9757.chunk.js",
-    "main.js.map": "/hackbeanpot2021/static/js/main.1c1b9757.chunk.js.map",
+    "main.css": "/hackbeanpot2021/static/css/main.5680d79a.chunk.css",
+    "main.js": "/hackbeanpot2021/static/js/main.c9d84b67.chunk.js",
+    "main.js.map": "/hackbeanpot2021/static/js/main.c9d84b67.chunk.js.map",
     "runtime-main.js": "/hackbeanpot2021/static/js/runtime-main.25359908.js",
     "runtime-main.js.map": "/hackbeanpot2021/static/js/runtime-main.25359908.js.map",
     "static/js/2.059e2340.chunk.js": "/hackbeanpot2021/static/js/2.059e2340.chunk.js",
     "static/js/2.059e2340.chunk.js.map": "/hackbeanpot2021/static/js/2.059e2340.chunk.js.map",
     "index.html": "/hackbeanpot2021/index.html",
-    "static/css/main.929ae3ab.chunk.css.map": "/hackbeanpot2021/static/css/main.929ae3ab.chunk.css.map",
+    "static/css/main.5680d79a.chunk.css.map": "/hackbeanpot2021/static/css/main.5680d79a.chunk.css.map",
     "static/js/2.059e2340.chunk.js.LICENSE.txt": "/hackbeanpot2021/static/js/2.059e2340.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.25359908.js",
     "static/js/2.059e2340.chunk.js",
-    "static/css/main.929ae3ab.chunk.css",
-    "static/js/main.1c1b9757.chunk.js"
+    "static/css/main.5680d79a.chunk.css",
+    "static/js/main.c9d84b67.chunk.js"
   ]
 }
