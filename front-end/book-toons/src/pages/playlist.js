@@ -3,6 +3,7 @@ import './playlist.css';
 import Header from '../components/header';
 import Title from '../components/title';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 class Playlist extends React.Component {
     constructor(props) {
