@@ -5,6 +5,7 @@ import Title from '../components/title';
 import BookCard from '../components/bookcard';
 import SearchBar from '../components/searchbar';
 import { motion } from "framer-motion";
+import {getTones} from '../utils/api';
 
 class BookResults extends React.Component {
     constructor(props) {
@@ -17,6 +18,18 @@ class BookResults extends React.Component {
             id_selected: "",
             userInput: ""
         }     
+    }
+
+    handleSelection = () => {
+        getTones(this.state.books.find(b => b.id === this.state.id_selected).description)
+            .then(response => {
+                this.props.history.push({
+                    pathname: '/hackbeanpot2021/artists',
+                    state: {
+                        tone: response
+                    }
+                })
+            })
     }
 
     updateInput = (input) => {
@@ -50,7 +63,9 @@ class BookResults extends React.Component {
                 <div className="bookresult-buttoncontainer">
                 <motion.button 
                     whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.8 }} >continue</motion.button>
+                    whileTap={{ scale: 0.8 }} 
+                    onClick={this.handleSelection}
+                    >continue</motion.button>
                 </div>
                 <SearchBar text={searchText} updateInput={this.updateInput}/>
                 <div className="search-buttoncontainer">

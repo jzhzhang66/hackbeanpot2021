@@ -5,6 +5,8 @@ const url = 'https://api.us-south.tone-analyzer.watson.cloud.ibm.com/instances/e
 const key = '55bSeiSLL-E_MhveNAmifQYZIhAkrkByvcs76e7qRKze'
 
 async function analyzetone(text) {
+    console.log('hellihsdfhalkjsdfh')
+    console.log(text)
     let toneResults;
     const tones = {
         anger: 0,
@@ -74,7 +76,7 @@ async function analyzetone(text) {
     tones.analytical = tones.analytical / len
     tones.confident = tones.confident / len
     tones.tentative = tones.tentative / len
-
+    console.log(tones)
     return tones 
 }
 
