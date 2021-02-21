@@ -1,13 +1,22 @@
 import React from 'react';
 import './searchbar.css';
 
-function SearchBar(props) {
-    return (
-        <div className="search-div">
-            <h2 for="search-input">{props.text}</h2>
-            <input className="search-input" id="search-input" type="text"/>
-        </div>
-    );
+class SearchBar extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <div className="search-div">
+                <h2 for="search-input">{this.props.text}</h2>
+                <input className="search-input" 
+                id="search-input"
+                type="text"
+                onChange={(e) => this.props.updateInput(e.target.value)}/>
+            </div>
+        );
+    }
 }
 
 export default SearchBar
