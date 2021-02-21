@@ -24,6 +24,7 @@ class Playlist extends React.Component {
             
             <div>
             <Header/>
+            <h1 className="playlist-intro">we have created a playlist for you based on the tone of your book and your favorite artists.</h1>
             <Title text="your playlist" width={'320px'}/>
             <div className="playlist-container">
                     {this.state.playlist.map(song => <a className="song-link" target="_blank" href={song.songUrl}>

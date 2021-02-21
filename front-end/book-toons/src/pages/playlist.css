@@ -9,10 +9,19 @@
     margin: 17rem auto auto auto;
 }
 
+.playlist-intro {
+    width: 750px;
+    margin: 3rem auto;
+    text-align: center;
+    font-size: 32px;
+    color: #89C076;
+}
+
 .song {
     text-align: center;
     margin-left: 8rem;
     margin-right: 8rem;
+    font-size: 22px;
 }
 
 .song-link {
