@@ -1,0 +1,13 @@
+.artist-buttoncontainer {
+    padding-top: 2rem;
+    margin: 0 auto;
+    text-align: center;
+}   
+
+.artist-search {
+    height: 50px;
+    width: 450px;
+    border-radius: 8px;
+    margin: .75rem auto;
+    border: solid 2px black;
+}
