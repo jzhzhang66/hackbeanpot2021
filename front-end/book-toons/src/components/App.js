@@ -1,5 +1,4 @@
 import React from 'react';
-import './app.css';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../pages/home';

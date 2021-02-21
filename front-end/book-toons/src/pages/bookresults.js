@@ -3,7 +3,6 @@ import './bookresults.css';
 import Header from '../components/header';
 import Title from '../components/title';
 import BookCard from '../components/bookcard';
-import SearchBar from '../components/searchbar';
 import { motion } from "framer-motion";
 import {getTones} from '../utils/api';
 
@@ -51,8 +50,6 @@ class BookResults extends React.Component {
     }
 
     render() {
-        //console.log(this.state.books)
-        const searchText = "can't find what you're looking for? search again!"
         return (
             <div>
                  {this.state.isLoading && <motion.h1 className="loading-text" animate={{y: [0, 20, 0]}} transition={{loop: Infinity, duration: 2}}>think about your top three favorite artists...</motion.h1>}
