@@ -12,7 +12,7 @@ async function getBooksByTitle(title) {
         const book = {
             id: curr.id,
             title: curr.volumeInfo.title,
-            authors: curr.volumeInfo.authors[0],
+            authors: curr.volumeInfo.authors,
             description: curr.volumeInfo.description
         }
         listOfBooks.push(book)
