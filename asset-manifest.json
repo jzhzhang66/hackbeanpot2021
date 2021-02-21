@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/hackbeanpot2021/static/css/main.2960a1f8.chunk.css",
-    "main.js": "/hackbeanpot2021/static/js/main.7b1a98c0.chunk.js",
-    "main.js.map": "/hackbeanpot2021/static/js/main.7b1a98c0.chunk.js.map",
+    "main.css": "/hackbeanpot2021/static/css/main.e407ef27.chunk.css",
+    "main.js": "/hackbeanpot2021/static/js/main.5b5140e6.chunk.js",
+    "main.js.map": "/hackbeanpot2021/static/js/main.5b5140e6.chunk.js.map",
     "runtime-main.js": "/hackbeanpot2021/static/js/runtime-main.25359908.js",
     "runtime-main.js.map": "/hackbeanpot2021/static/js/runtime-main.25359908.js.map",
-    "static/js/2.4f4cd013.chunk.js": "/hackbeanpot2021/static/js/2.4f4cd013.chunk.js",
-    "static/js/2.4f4cd013.chunk.js.map": "/hackbeanpot2021/static/js/2.4f4cd013.chunk.js.map",
+    "static/js/2.7f47b3ec.chunk.js": "/hackbeanpot2021/static/js/2.7f47b3ec.chunk.js",
+    "static/js/2.7f47b3ec.chunk.js.map": "/hackbeanpot2021/static/js/2.7f47b3ec.chunk.js.map",
     "index.html": "/hackbeanpot2021/index.html",
-    "static/css/main.2960a1f8.chunk.css.map": "/hackbeanpot2021/static/css/main.2960a1f8.chunk.css.map",
-    "static/js/2.4f4cd013.chunk.js.LICENSE.txt": "/hackbeanpot2021/static/js/2.4f4cd013.chunk.js.LICENSE.txt"
+    "static/css/main.e407ef27.chunk.css.map": "/hackbeanpot2021/static/css/main.e407ef27.chunk.css.map",
+    "static/js/2.7f47b3ec.chunk.js.LICENSE.txt": "/hackbeanpot2021/static/js/2.7f47b3ec.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.25359908.js",
-    "static/js/2.4f4cd013.chunk.js",
-    "static/css/main.2960a1f8.chunk.css",
-    "static/js/main.7b1a98c0.chunk.js"
+    "static/js/2.7f47b3ec.chunk.js",
+    "static/css/main.e407ef27.chunk.css",
+    "static/js/main.5b5140e6.chunk.js"
   ]
 }
