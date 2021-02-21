@@ -26,15 +26,17 @@ class Playlist extends React.Component {
             <Header/>
             <Title text="your playlist" width={'320px'}/>
             <div className="playlist-container">
-                    {this.state.playlist.map(song => <a href={song.songUrl}>
+                    {this.state.playlist.map(song => <a className="song-link" target="_blank" href={song.songUrl}>
                     <p className="song" song={song} 
                     updateSelected={this.updateSelected} 
-                    selected={this.state.id_selected === song.id}>{song.title + ' -'} {song.artist + ' - '} </p>
+                    selected={this.state.id_selected === song.id}>{song.title + ' -'} {song.artist[0]} </p>
                     </a>)}
                 </div>
             <div className="playlist-buttoncontainer">
                 <Link to="/hackbeanpot2021">
-                <button>start over</button>
+                <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.8 }} >start over</motion.button>
                 </Link>
             </div>
             </div>
