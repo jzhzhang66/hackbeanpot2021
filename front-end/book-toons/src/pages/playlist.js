@@ -47,7 +47,7 @@ class Playlist extends React.Component {
                     selected={this.state.id_selected === song.id}>{song.song + ' -'} {song.artist}</p>)}
                 </div>
             <div className="playlist-buttoncontainer">
-                <Link to="/">
+                <Link to="/hackbeanpot2021">
                 <button>start over</button>
                 </Link>
             </div>
