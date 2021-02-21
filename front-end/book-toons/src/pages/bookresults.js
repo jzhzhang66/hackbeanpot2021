@@ -16,11 +16,15 @@ class BookResults extends React.Component {
         this.state = {
             books: this.props.history.location.state.books,
             id_selected: "",
-            userInput: ""
+            userInput: "",
+            isLoading: false
         }     
     }
 
     handleSelection = () => {
+        this.setState({
+            isLoading: true
+        })
         getTones(this.state.books.find(b => b.id === this.state.id_selected).description)
             .then(response => {
                 this.props.history.push({
@@ -51,6 +55,9 @@ class BookResults extends React.Component {
         const searchText = "can't find what you're looking for? search again!"
         return (
             <div>
+                 {this.state.isLoading && <motion.h1 className="loading-text" animate={{y: [0, 20, 0]}} transition={{loop: Infinity, duration: 2}}>think about your top three favorite artists...</motion.h1>}
+                {!this.state.isLoading && 
+                <div>
                 <Header />
                 <Title text="search results" width={'370px'} />
                 {console.log(this.state.books)}
@@ -68,6 +75,7 @@ class BookResults extends React.Component {
                     disabled={!this.state.id_selected}
                     >continue</motion.button>
                 </div>
+                </div>}
             </div>
         )
     }
