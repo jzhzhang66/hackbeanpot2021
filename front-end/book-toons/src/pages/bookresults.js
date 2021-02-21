@@ -3,7 +3,6 @@ import './bookresults.css';
 import Header from '../components/header';
 import Title from '../components/title';
 import BookCard from '../components/bookcard';
-import SearchBar from '../components/searchbar';
 import { motion } from "framer-motion";
 import {getTones} from '../utils/api';
 
@@ -47,8 +46,6 @@ class BookResults extends React.Component {
     }
 
     render() {
-        //console.log(this.state.books)
-        const searchText = "can't find what you're looking for? search again!"
         return (
             <div>
                 <Header />

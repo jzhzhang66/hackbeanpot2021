@@ -12,7 +12,7 @@ class BookCard extends React.Component {
             onClick={() => this.props.updateSelected(this.props.book.id)}>
                     <div className="card-contents">
                     <p>{this.props.book.title}</p>
-                    <p>{this.props.book.authors ? this.props.book.authors : ''}</p>
+                    <p>{this.props.book.authors[0] ? this.props.book.authors[0] : ''}</p>
                     </div>
             </motion.button>
         );
