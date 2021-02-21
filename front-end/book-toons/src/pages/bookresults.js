@@ -31,8 +31,16 @@ class BookResults extends React.Component {
                     author: 'laurel'
                 }
             ], 
-            id_selected: ""
+            id_selected: "",
+            userInput: ""
         }     
+    }
+
+    updateInput = (input) => {
+        this.setState({
+            userInput: input
+        })
+        console.log(this.state.userInput)
     }
 
     updateSelected = (id) => {
@@ -57,7 +65,7 @@ class BookResults extends React.Component {
                 <div className="bookresult-buttoncontainer">
                     <button>continue</button>
                 </div>
-                <SearchBar text={searchText}/>
+                <SearchBar text={searchText} updateInput={this.updateInput}/>
                 <div className="search-buttoncontainer">
                     <button>search</button>
                 </div>
