@@ -67,12 +67,6 @@ class BookResults extends React.Component {
                     onClick={this.handleSelection}
                     >continue</motion.button>
                 </div>
-                <SearchBar text={searchText} updateInput={this.updateInput}/>
-                <div className="search-buttoncontainer">
-                <motion.button 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.8 }} >search</motion.button>
-                </div>
             </div>
         )
     }
