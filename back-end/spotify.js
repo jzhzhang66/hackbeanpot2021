@@ -1,4 +1,5 @@
 const { default: axios } = require('axios');
+const { json } = require('express');
 
 const client_id = 'a42b65e186a0433aba79612fbcefe460';
 const client_secret = 'c1224b10cbb84909b44d610350bcfbb2';
@@ -83,13 +84,13 @@ async function getTopTracks(artistsId, accessToken) {
 async function main() {
     var token = await getAuthorization();
     //TODO: convert user input to spotify uri !
-    var artistList = await getRelatedArtists(['spotify:artist:3pc0bOVB5whxmD50W79wwO', 'spotify:artist:00OF0nwYaoBSO3AnPVq3vE', 'spotify:artist:0lawSNBxNgJFQYJnQzLH8c'], token);
+    var artistList = await getRelatedArtists(['spotify:artist:06HL4z0CvFAxyc27GXpf02', 'spotify:artist:163tK9Wjr9P9DmM0AVK7lm', 'spotify:artist:6eUKZXaKkcviH0Ku9w2n3V'], token);
     //TODO: call artist top tracks
     //      call song selection function
     //      either return list of songs or create playlist
     var trackList = await getTopTracks(artistList, token);
 
-    console.log(await getTitleAndArtist(['6NFyWDv5CjfwuzoCkw47Xf', '1ZY1PqizIl78geGM4xWlEA'], token));
+    //console.log(await getTitleAndArtist(['6NFyWDv5CjfwuzoCkw47Xf', '1ZY1PqizIl78geGM4xWlEA'], token));
 
     //json object for testing!!
     const jsonDerulo = {
@@ -101,44 +102,55 @@ async function main() {
 
     var finalSongs = await getSongs(trackList, jsonDerulo, token);
     //console.log(finalSongs);
-    return finalSongs;
+
+    //sanity checking the playlist results
+    var sanityCheck = await getTitleAndArtist(finalSongs, token)
+    console.log(sanityCheck)
+
+    // var searchResults = await getArtistName('Taylor Swifit', token)
+    // console.log(searchResults)
+    // return searchResults;
+
+    const exName = 'pov: you\'re listening to the toons of chain of gold'
+    const exDescription = 'perfect for all your listening needs—created by book toons.'
+    var createdPlaylist = await createPlaylist(exName, exDescription, token)
+    console.log(createdPlaylist)
 }
 
 main();
 
 async function getSongs(trackList, jsonObj, accessToken) {
     trackList = trackList.sort(() => Math.random() - 0.5);
+    console.log(trackList.length);
     var finalSongs = [];
     var counter = 100;
     //note: trackList.length + 100????
+    var iterations = 0;
     while (finalSongs.length < 30 && counter < trackList.length - (trackList.length % 100)) {
         var hundred = trackList.slice(counter - 100, counter);
         var hundredCopy = Array.from(hundred);
-        var trackFeatures = hundred.map(feat => {
-            return axios({
-                url: `https://api.spotify.com/v1/audio-features/${feat}`,
-                method: 'get',
-                headers: {
-                    Authorization: "Bearer " + accessToken.access_token
-                }
-                //, 
-                // params: {
-                //     ids: hundredCopy.join(",")
-                // }
-            })
-                .catch(error => console.log(error));
-        })
-        trackFeatures = await Promise.all(trackFeatures);
-        trackFeatures.forEach(response => {
-            console.log(response.data.audio_features);
-            response.data.audio_features.forEach(track => {
-                if (passesMood(jsonObj, track)) {
-                    finalSongs.push(track.id);
-                }
-            })
+
+        var trackFeatures = await axios({
+            url: 'https://api.spotify.com/v1/audio-features',
+            method: 'get',
+            headers: {
+                Authorization: "Bearer " + accessToken.access_token
+            },
+            params: {
+                ids: hundredCopy.join(",")
+            }
+        }).catch(error => console.log(error));
+
+        trackFeatures.data.audio_features.forEach(track => {
+            if (passesMood(jsonObj, track) && !finalSongs.includes(track.id)) {
+                finalSongs.push(track.id);
+            }
         })
         counter = counter + 100;
+        iterations++
     }
+    //finalSongs.slice(0, 30)
+    console.log(iterations)
     return finalSongs;
 }
 
@@ -151,30 +163,39 @@ function passesMood(jsonObj, feature) {
     else {
         bookMode = 0;
     }
-    return (bookMode === feature.mode &&
-        inBetween(bookMoods.joy, feature.joy) &&
-        inBetween(bookMoods.sadness, feature.sadness) &&
-        inBetween(bookMoods.anger, feature.anger) &&
-        inBetween(bookMoods.confident, feature.confidnet));
+    danceability = inBetween(bookMoods.danceability, feature.danceability, .2);
+    energy = inBetween(bookMoods.energy, feature.energy, .3);
+    valence = inBetween(bookMoods.valence, feature.valence, .3);
+    tempo = inBetween(bookMoods.tempo, feature.tempo, 15);
+    
+    return (bookMode === feature.mode && 
+        valence &&
+        ((danceability && energy) || (energy && tempo) || (danceability && tempo)));
 }
 
 function calcMoods(jsonObj) {
+    var moodTotals = parseFloat(jsonObj.joy + jsonObj.confident + jsonObj.anger + jsonObj.sadness)
+    var joy = jsonObj.joy / moodTotals
+    var confident = jsonObj.confident / moodTotals
+    var anger = jsonObj.anger / moodTotals
+    var sadness = jsonObj.sadness / moodTotals
+
     const moods = {
-        danceability: 0.7 * jsonObj.joy + 0.7 * jsonObj.confident + 0.5 * jsonObj.anger + 0.1 * jsonObj.sadness,
-        energy: 0.7 * jsonObj.joy + 0.7 * jsonObj.confident + 0.7 * jsonObj.anger + 0.2 * jsonObj.sadness,
-        valence: 0.9 * jsonObj.joy + 0.7 * jsonObj.confident + 0.05 * jsonObj.anger + 0.05 * jsonObj.sadness,
-        tempo: 130 * jsonObj.anger + 80 * jsonObj.sadness
+        danceability: 0.7 * joy + 0.7 * confident + 0.5 * anger + 0.1 * sadness,
+        energy: 0.7 * joy + 0.7 * confident + 0.7 * anger + 0.2 * sadness,
+        valence: 0.9 * joy + 0.7 * confident + 0.05 * anger + 0.05 * sadness,
+        tempo: 130 * anger + 80 * sadness
     }
     return moods;
 }
 
-function inBetween(rangeVal, comparator) {
-    return comparator <= rangeVal + 0.1 && comparator >= rangeVal - 0.1;
+function inBetween(rangeVal, comparator, absVal) {
+    return comparator <= rangeVal + absVal && comparator >= rangeVal - absVal;
 }
 
 async function getTitleAndArtist(listIds, accessToken) {
     var songInfo = [];
-    var songResponses = listIds.map(info => {
+    var songResponses = listIds.map(() => {
         return axios({
             url: `https://api.spotify.com/v1/tracks`,
             method: 'get',
@@ -200,4 +221,43 @@ async function getTitleAndArtist(listIds, accessToken) {
         songInfo.push(songJson);
     })
     return songInfo;
+}
+
+async function getArtistName(userInputArtist, accessToken) {
+
+    var artistList = [];
+    var artistResults = await axios({
+            url: `https://api.spotify.com/v1/search`,
+            method: 'get',
+            headers: {
+                Authorization: "Bearer " + accessToken.access_token
+            },
+            params: {
+                q: userInputArtist,
+                type: 'artist'
+            }
+        }).catch(error => console.log(error))
+    artistResults.data.artists.items.forEach(item => {
+        artistList.push(item.name);
+    })
+    return artistList;
+}
+
+async function createPlaylist(name, description, accessToken) {
+    var userId = '12161275801'
+    var axios = require('axios');
+    return axios({
+        url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+        method: 'post',
+        params: {
+            name: name,
+            description: description
+        },
+        headers: {
+            Authorization: "Bearer " + accessToken.access_token
+        }
+    })
+        .then((response) => {
+            return response.data;
+        });
 }
