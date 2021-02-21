@@ -3,7 +3,7 @@ const key = 'AIzaSyBJjCaB2t7ItBY0P2NcjMu9fvd8KysKIOc'
 const url = 'https://www.googleapis.com/books/v1/volumes?'
 
 
-async function getBooksByTitle(title) {
+export async function getBooksByTitle(title) {
     const bookResults = await axios.get(`${url}q=${title}&key=${key}`)
         .then(response => response.data.items)
     const listOfBooks = []
@@ -18,8 +18,4 @@ async function getBooksByTitle(title) {
         listOfBooks.push(book)
     }
     return listOfBooks
-}
-
-module.exports = {
-    getBooksByTitle
 }
