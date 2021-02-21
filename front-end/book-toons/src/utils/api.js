@@ -15,5 +15,5 @@ export function getSongs(tone, artists) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         }})
-        .then(response => console.log(response.data))
+        .then(response => response.data)
 }
