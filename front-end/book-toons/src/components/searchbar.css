@@ -15,6 +15,12 @@ input {
     display: flex;
 }
 
+input[type=text] {
+    font-family: "Arial Unicode MS", "Helvetica Neue", Helvetica, sans-serif;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
 h2 {
     font-weight: 500;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
