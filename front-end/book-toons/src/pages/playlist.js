@@ -14,7 +14,6 @@ class Playlist extends React.Component {
         this.state = {
             id_selected: "",
             userInput: "",
-            isLoading: true,
             playlist: this.props.history.location.state.playlist
         }     
     }
@@ -22,8 +21,7 @@ class Playlist extends React.Component {
     render() {
         {console.log(this.state.playlist)}
         return (
-            <div>
-            {this.state.isLoading &&
+            
             <div>
             <Header/>
             <Title text="your playlist" width={'320px'}/>
@@ -39,8 +37,6 @@ class Playlist extends React.Component {
                 <button>start over</button>
                 </Link>
             </div>
-            </div>}
-            {!this.state.isLoading && <h1 className="loading-text">hang tight while we create the perfect playlist...</h1>}
             </div>
         );
     }
