@@ -2,6 +2,7 @@ import React from 'react';
 import './playlist.css';
 import Header from '../components/header';
 import Title from '../components/title';
+import { Link } from 'react-router-dom';
 
 class Playlist extends React.Component {
     constructor(props) {
@@ -45,7 +46,9 @@ class Playlist extends React.Component {
                     selected={this.state.id_selected === song.id}>{song.song + ' -'} {song.artist}</p>)}
                 </div>
             <div className="playlist-buttoncontainer">
+                <Link to="/">
                 <button>start over</button>
+                </Link>
             </div>
             </div>}
             {!this.state.isLoading && <h1 className="loading-text">hang tight while we create the perfect playlist...</h1>}
