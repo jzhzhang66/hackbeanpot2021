@@ -1,0 +1,29 @@
+.search-input {
+    width: 75%;
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid #000000;
+}
+
+.search-div {
+    margin: auto;
+    justify-content: center;
+}
+
+input {
+    margin: 0 auto;
+    display: flex;
+}
+
+input[type=text] {
+    font-family: "Arial Unicode MS", "Helvetica Neue", Helvetica, sans-serif;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+h2 {
+    font-weight: 500;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 25px;
+    margin-left: 12%;
+}
