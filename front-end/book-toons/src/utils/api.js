@@ -6,5 +6,14 @@ export function getTones(text) {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         }})
+        .then(response => response.data)
+}
+
+export function getSongs(tone, artists) {
+    console.log(tone, artists)
+    return axios.get('http://localhost:8080/songs', {params: {tone, artists}, headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        }})
         .then(response => console.log(response.data))
 }

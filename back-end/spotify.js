@@ -85,6 +85,7 @@ async function getTopTracks(artistsId, accessToken) {
     })
     artistTopTracks = await Promise.all(artistTopTracks);
     artistTopTracks.forEach(response => {
+        console.log(response)
         response.data.tracks.forEach(tracksObj => {
             topTracks.push(tracksObj.id);
         })
@@ -106,13 +107,13 @@ async function main(mood, userArtists) {
     var userArtistIds = [await getArtistId(userArtists[0], token), await getArtistId(userArtists[1], token), await getArtistId(userArtists[2], token)]
 
     var artistList = await getRelatedArtists(userArtistIds, token);
+
     //TODO: call artist top tracks
     //      call song selection function
     //      either return list of songs or create playlist
     var trackList = await getTopTracks(artistList, token);
 
     var finalSongs = await getSongs(trackList, mood, token);
-    //console.log(finalSongs);
 
     //sanity checking the playlist results
     var sanityCheck = await getTitleAndArtist(finalSongs, token)
@@ -139,7 +140,7 @@ const jsonDerulo = {
     confident: 0.2
 }
 
-main(jsonDerulo, exArtistList).then(response => console.log(response));
+//main(jsonDerulo, exArtistList).then(response => console.log(response));
 
 
 // gets all of the relevant songs that are to be in the mood playlist
@@ -168,6 +169,7 @@ async function getSongs(trackList, jsonObj, accessToken) {
         trackFeatures.data.audio_features.forEach(track => {
             if (passesMood(jsonObj, track) && !finalSongs.includes(track.id)) {
                 finalSongs.push(track.id);
+                console.log("hitting if statement")
             }
         })
         counter = counter + 100;
@@ -180,6 +182,7 @@ async function getSongs(trackList, jsonObj, accessToken) {
 // args: JSON jsonObj (mood object), JSON feature (given song's feature list)
 // output: boolean saying whether it passed the vibecheck
 function passesMood(jsonObj, feature) {
+    console.log(typeof jsonObj + "  type of obj")
     var bookMoods = calcMoods(jsonObj);
     var bookMode;
     if (jsonObj.joy >= jsonObj.sadness) {
@@ -192,7 +195,7 @@ function passesMood(jsonObj, feature) {
     energy = inBetween(bookMoods.energy, feature.energy, .3);
     valence = inBetween(bookMoods.valence, feature.valence, .3);
     tempo = inBetween(bookMoods.tempo, feature.tempo, 15);
-    
+    console.log("danceability: " + danceability, "energy: " + energy, "valence: " + valence, "tempo: " + tempo)
     return (bookMode === feature.mode && 
         valence &&
         ((danceability && energy) || (energy && tempo) || (danceability && tempo)));
@@ -202,6 +205,7 @@ function passesMood(jsonObj, feature) {
 // args: JSON jsonObj (mood object)
 // output: JSON ideal track features based on mood
 function calcMoods(jsonObj) {
+
     var moodTotals = parseFloat(jsonObj.joy + jsonObj.confident + jsonObj.anger + jsonObj.sadness)
     var joy = jsonObj.joy / moodTotals
     var confident = jsonObj.confident / moodTotals
@@ -229,6 +233,7 @@ function inBetween(rangeVal, comparator, absVal) {
 // args: Array listIds (all of the trackIds), JSON accessToken
 // output: JSON songInfo (title and artist info)
 async function getTitleAndArtist(listIds, accessToken) {
+    console.log(listIds.length + "    list length", listIds)
     var songInfo = [];
     var songResponses = listIds.map(() => {
         return axios({
@@ -307,4 +312,8 @@ async function createPlaylist(name, description, accessToken) {
         .catch((error) => {
             console.log(error)
         })
+}
+
+module.exports = {
+    main
 }

@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var {analyzetone} = require('./analyzetone')
+var {main} = require('./spotify')
 //var bodyparser = require('body-parser')
 
 var port = process.env.PORT || 8080;
@@ -18,6 +19,13 @@ app.get('/tones', async function (req, res) {
     const tones = await analyzetone(req.query.text);
     res.json(tones);
 });
+
+app.get('/songs', async function (req, res) {
+    console.log(req.query.tone, req.query.artists)
+    const songs = await main(JSON.parse(req.query.tone), req.query.artists);
+    res.json(songs);
+});
+
 
 app.get('/', async function(req, res) {
     res.json('hello world')
