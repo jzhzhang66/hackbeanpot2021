@@ -2,7 +2,9 @@ const { default: axios } = require('axios');
 const { json } = require('express');
 
 const client_id = 'a42b65e186a0433aba79612fbcefe460';
+//const client_id = '5ef10b695ac04098ae22100b10c4556b';
 const client_secret = 'c1224b10cbb84909b44d610350bcfbb2';
+//const client_secret = '5ae6673dc84f4bf4b92de9ea50de5a3f';
 const grant_type = 'client_credentials';
 const combined = client_id + ":" + client_secret;
 const authorized = 'Basic ' + Buffer.from(combined).toString('base64');
@@ -16,8 +18,8 @@ function getAuthorization() {
         url: 'https://accounts.spotify.com/api/token',
         method: 'post',
         params: {
-            grant_type: grant_type
-            //scopes: 'modify-playlist-public'
+            grant_type: grant_type 
+            //scopes: 'playlist-modify-public'
         },
         headers: {
             Authorization: authorized
@@ -119,11 +121,10 @@ async function main(mood, userArtists) {
     // console.log(searchResults)
     // return searchResults;
 
-    // const exName = 'pov: you\'re listening to the toons of chain of gold'
-    // const exDescription = 'perfect for all your listening needs—created by book toons.'
-    // var createdPlaylist = await createPlaylist(exName, exDescription, token)
-    // console.log(createdPlaylist)
-    // return createdPlaylist
+    const exName = 'pov: you\'re listening to the toons of chain of gold'
+    const exDescription = 'perfect for all your listening needs—created by book toons.'
+    var createdPlaylist = await createPlaylist(exName, exDescription, token)
+    //console.log(createdPlaylist)
 
     return sanityCheck;
 }
@@ -250,7 +251,8 @@ async function getTitleAndArtist(listIds, accessToken) {
         })
         const songJson = {
             artist: artistList,
-            title: tracksObj.name
+            title: tracksObj.name, 
+            songUrl: tracksObj.external_urls.spotify
         }
         songInfo.push(songJson);
     })
