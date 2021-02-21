@@ -11,3 +11,9 @@
     margin: .75rem auto;
     border: solid 2px black;
 }
+
+input[type=text] {
+    font-family: "Arial Unicode MS", "Helvetica Neue", Helvetica, sans-serif;
+    padding-left: 20px;
+    font-size: 20px;
+}
