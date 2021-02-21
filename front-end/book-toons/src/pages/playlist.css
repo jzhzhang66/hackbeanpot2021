@@ -1,0 +1,14 @@
+.playlist-buttoncontainer {
+    margin: 3rem 0 0 69rem;
+}
+
+.loading-text {
+    font-size: 50px;
+    width: 400px;
+    text-align: center;
+    margin: 17rem auto auto auto;
+}
+
+.song {
+    text-align: center;
+}
