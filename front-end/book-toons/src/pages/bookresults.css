@@ -1,6 +1,11 @@
 .all-bookcard-container {
-    margin-top: 4rem;
-    justify-content: center;
-    text-align: center;
-    margin: 0 auto;
+    padding-top: 2px;
+}
+
+.bookresult-buttoncontainer {
+    margin: 3rem 0 6rem 67.5rem;
+}
+
+.search-buttoncontainer {
+    margin: 2rem 0 4rem 69rem;
 }

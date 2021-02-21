@@ -3,6 +3,7 @@ import './bookresults.css';
 import Header from '../components/header';
 import Title from '../components/title';
 import BookCard from '../components/bookcard';
+import SearchBar from '../components/searchbar';
 
 class BookResults extends React.Component {
     constructor(props) {
@@ -42,17 +43,25 @@ class BookResults extends React.Component {
     }
 
     render() {
+        const searchText = "can't find what you're looking for? search again!"
         return (
             <div>
-            <Header />
-            <Title text="search results" width={'370px'} />
-            <div className="all-bookcard-container">
-                {this.state.dummy.map(b => 
-                <BookCard book={b} 
-                updateSelected={this.updateSelected} 
-                selected={this.state.id_selected === b.id}/>)}
+                <Header />
+                <Title text="search results" width={'370px'} />
+                <div className="all-bookcard-container">
+                    {this.state.dummy.map(b => 
+                    <BookCard book={b} 
+                    updateSelected={this.updateSelected} 
+                    selected={this.state.id_selected === b.id}/>)}
+                </div>
+                <div className="bookresult-buttoncontainer">
+                    <button>continue</button>
+                </div>
+                <SearchBar text={searchText}/>
+                <div className="search-buttoncontainer">
+                    <button>search</button>
+                </div>
             </div>
-        </div>
         )
     }
 }

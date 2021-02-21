@@ -1,7 +1,22 @@
 .card-button {
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+}
+
+.card-contents {
+    position: relative;
+    margin: 0 auto;
 }
 
 .selected {
-    background-color: red;
+    background-color: #89C076;
+    border: #89C076;
+    color: #FFFAF2;
+}
+
+.selected:hover {
+    color: #FFFAF2;
+    border: #89C076;
 }
