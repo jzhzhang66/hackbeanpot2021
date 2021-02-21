@@ -4,6 +4,7 @@ import Header from '../components/header';
 import Title from '../components/title';
 import {getSongs} from '../utils/api';
 import { motion } from "framer-motion";
+
 class Artists extends React.Component {
 
     constructor(props) {
@@ -71,7 +72,11 @@ class Artists extends React.Component {
                 <input className="artist-search" type="text" onChange={(e) => this.updateArtist(2, e)}></input>
                 <input className="artist-search" type="text" onChange={(e) => this.updateArtist(3, e)}></input>
                 <div className="artist-buttoncontainer">
-                    <button id="artist-continue" onClick={this.handleContinue}>continue</button>
+                    <motion.button id="artist-continue" disabled={!(this.state.artist1 && this.state.artist2 && this.state.artist3)} 
+                    onClick={this.handleContinue}
+                    whileHover={{ scale: (this.state.artist1 && this.state.artist2 && this.state.artist3) ? 1.1 : 1 }}
+                    whileTap={{ scale: (this.state.artist1 && this.state.artist2 && this.state.artist3) ? 0.8 : 1 }}
+                    >continue</motion.button>
                 </div>
                 </div>
     }
