@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path = "/" component={Home}/>
+          <Route exact path = "/hackbeanpot2021" component={Home}/>
           <Route exact path = "/book-results" component={BookResults}/>
           <Route exact path = "/artists" component={Artists}/>
           <Route exact path = "/playlist" component={Playlist}/>
