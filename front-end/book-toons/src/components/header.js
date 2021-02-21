@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function Header() {
     return (
         <div className="header-container">
-            <Link to='/' >
+            <Link to='/hackbeanpot2021' >
             <img src={booktoonslogo} className="logo"/>
             </Link>
             <div className="name-container">

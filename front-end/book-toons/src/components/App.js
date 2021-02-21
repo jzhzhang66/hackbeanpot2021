@@ -18,9 +18,9 @@ function App() {
       <div>
         <Switch>
           <Route exact path = "/hackbeanpot2021" component={Home}/>
-          <Route exact path = "/book-results" component={BookResults}/>
-          <Route exact path = "/artists" component={Artists}/>
-          <Route exact path = "/playlist" component={Playlist}/>
+          <Route exact path = "/hackbeanpot2021/book-results" component={BookResults}/>
+          <Route exact path = "/hackbeanpot2021/artists" component={Artists}/>
+          <Route exact path = "/hackbeanpot2021/playlist" component={Playlist}/>
         </Switch>
       </div>
     </Router>
