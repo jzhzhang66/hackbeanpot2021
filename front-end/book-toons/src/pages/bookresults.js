@@ -9,29 +9,11 @@ import { motion } from "framer-motion";
 class BookResults extends React.Component {
     constructor(props) {
         super(props)
+        if (!this.props.history.location.state) {
+            this.props.history.push('/hackbeanpot2021')
+        }
         this.state = {
-            dummy: [
-                {
-                    id: 123,
-                    title: 'meggie',
-                    author: 'judy'
-                },
-                {
-                    id: 234,
-                    title: 'julie',
-                    author: 'carissa'
-                },
-                {
-                    id: 345,
-                    title: 'adrianna',
-                    author: 'shine'
-                },
-                {
-                    id: 456,
-                    title: 'yerin',
-                    author: 'laurel'
-                }
-            ], 
+            books: this.props.history.location.state.books,
             id_selected: "",
             userInput: ""
         }     
@@ -52,13 +34,15 @@ class BookResults extends React.Component {
     }
 
     render() {
+        //console.log(this.state.books)
         const searchText = "can't find what you're looking for? search again!"
         return (
             <div>
                 <Header />
                 <Title text="search results" width={'370px'} />
+                {console.log(this.state.books)}
                 <div className="all-bookcard-container">
-                    {this.state.dummy.map(b => 
+                    {this.state.books.map(b => 
                     <BookCard book={b} 
                     updateSelected={this.updateSelected} 
                     selected={this.state.id_selected === b.id}/>)}

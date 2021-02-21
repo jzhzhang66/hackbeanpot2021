@@ -17,7 +17,7 @@ async function getBooksByTitle(title) {
         }
         listOfBooks.push(book)
     }
-    console.log(listOfBooks)
+    return listOfBooks
 }
 
 module.exports = {
